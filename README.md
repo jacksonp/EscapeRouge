@@ -1,5 +1,5 @@
 # EscapeRouge
-Open source unity game ([Google Play](https://play.google.com/store/apps/details?id=com.agorite.escaperouge), [iTunes](https://itunes.apple.com/us/app/escape-rouge/id899501734?ls=1&mt=8)). More info: [Escape Rouge homepage](http://www.agorite.com/escaperouge/).
+Open source unity game ([Google Play](https://play.google.com/store/apps/details?id=com.agorite.escaperouge), [iTunes](https://itunes.apple.com/us/app/escape-rouge/id899501734?ls=1&mt=8)).
 
 # Installation
 
