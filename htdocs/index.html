@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css">
+<link rel="stylesheet" href="css/styles.css">
+
+<title>Escape Rouge</title>
+
+<div class="contents">
+
+    <h1>ESCAPE ROUGE</h1>
+
+    <p><img src="img/me-round.png" class="profile-img" alt="Profile Pic">Escape Rouge is a game for phones and
+        tablets. You play by tilting your device: I wanted to make an action game where you didn't block your view of
+        the screen with your fingers.
+
+    <p class="center">
+        <iframe width="640" height="480" src="https://www.youtube.com/embed/p0XST9xWEcM?rel=0" frameborder="0"
+                allowfullscreen></iframe>
+
+    <p>Escape Rouge is very challenging. Do you get an adrenaline hit when you've narrowly cheated death, thanks to
+        quick reflexes? You'll get that several times a minute playing Escape Rouge, assuming you can survive for a
+        minute!
+
+    <p class="center"><a href="https://play.google.com/store/apps/details?id=com.agorite.escaperouge"><img
+            alt="Android app on Google Play" src="img/android-app-on-google-play.png" width="200"></a> &nbsp; <a
+            href="https://itunes.apple.com/us/app/escape-rouge/id899501734"><img alt="Available on the app store"
+                                                                                 src="img/available-on-the-app-store.png"
+                                                                                 width="200"></a>
+
+    <div class="ship-area">
+        <img src="img/ship.png" alt="Ship" class="ship">
+    </div>
+
+</div>
+
+<img class="star" src="img/star.png">
+<img class="asteroid" src="img/asteroid.png">
+
+<script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+
+<script>
+    /*global YUI */
+    YUI().use('node', 'transition', function (Y) {
+
+        var
+            body = document.body,
+            html = document.documentElement,
+            bodyNode = Y.one(body),
+            i, star, asteroid,
+            maxStars = bodyNode.get('winWidth') * bodyNode.get('winHeight') / 10000,
+            height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+
+        for (i = 0; i < maxStars; i += 1) {
+            star = Y.Node.create('<img class="star" src="img/star.png">');
+            bodyNode.append(star);
+            window.setTimeout(moveStar, i * 500, star);
+        }
+
+        function moveStar(star) {
+
+            var xPos = Math.random() * (star.get('winWidth') - 2);
+
+            star.setXY([xPos, -2]);
+            star.setStyle('opacity', Math.random());
+
+            star.transition({
+                easing: 'linear',
+                duration: 20 + Math.random() * 20,
+                top: (height - 2) + 'px'
+            }, function () {
+                moveStar(this);
+            });
+        }
+
+        for (i = 0; i < 10; i += 1) {
+            asteroid = Y.Node.create('<img class="star" src="img/asteroid.png">');
+            bodyNode.append(asteroid);
+            window.setTimeout(moveAsteroid, 6000 + i * 500, asteroid);
+        }
+
+        function moveAsteroid(asteroid) {
+
+            var xPos = Math.random() * (asteroid.get('winWidth') - 2);
+
+
+            asteroid.setXY([xPos, -256]);
+            asteroid.setStyle('width', 10 + Math.random() * 100);
+
+            asteroid.transition({
+                easing: 'linear',
+                duration: 10 + Math.random() * 10,
+                top: (height - 2) + 'px',
+                left: Math.random() * (asteroid.get('winWidth') - 256) + 'px'
+            }, function () {
+                moveAsteroid(this);
+            });
+        }
+
+
+        var ship = Y.one('.ship');
+
+        function moveShip() {
+            var leftPos = Math.floor(Math.random() * (ship.get('winWidth') - 42));
+            ship.transition({
+                duration: 5,
+                left: leftPos + 'px'
+            }, function () {
+                moveShip();
+            });
+        }
+
+        window.setTimeout(moveShip, 5000);
+
+
+    });
+
+</script>
