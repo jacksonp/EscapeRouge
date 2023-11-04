@@ -1,13 +1,5 @@
 builds/
 
-# ======================== #
-# Google Play Games plugin #
-# ======================== #
-Assets/GooglePlayGames.meta
-Assets/GooglePlayGames/
-Assets/Plugins.meta
-Assets/Plugins/
-
 # =============== #
 # Unity generated #
 # =============== #
@@ -15,6 +7,8 @@ Temp/
 Obj/
 UnityGenerated/
 Library/
+UserSettings/
+Logs/
  
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
@@ -29,6 +23,8 @@ ExportedObj/
 *.user
 *.unityproj
 *.booproj
+# Visual Studio cache directory
+.vs/
  
 # ============ #
 # OS generated #
