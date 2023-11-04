@@ -71,15 +71,6 @@ public class MainMenu : MonoBehaviour
     void OnGUI()
     {
 
-        if (!GameService.IsAuthenticated())
-        {
-            if (PlayerPrefs.HasKey("authenticated"))
-            {
-                PlayerPrefs.DeleteKey("authenticated");
-                GameService.Authenticate(0);
-            }
-        }
-
         if (buttonStyle == null)
         {
             buttonStyle = new GUIStyle(GUI.skin.button);
@@ -108,18 +99,6 @@ public class MainMenu : MonoBehaviour
         if (GUILayout.Button(Localise.translate("PLAY"), buttonStyle))
         {
             Application.LoadLevel("RandomAsteroids");
-        }
-        GUILayout.Space(20);
-
-        if (GUILayout.Button(Localise.translate("Leaderboard"), buttonStyle))
-        {
-            GameService.ShowLeaderboard();
-        }
-        GUILayout.Space(20);
-
-        if (GUILayout.Button(Localise.translate("Achievements"), buttonStyle))
-        {
-            GameService.ShowAchievements();
         }
         GUILayout.Space(20);
 

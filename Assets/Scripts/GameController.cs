@@ -165,10 +165,6 @@ public class GameController : MonoBehaviour
               timeText.text = ((player.position - lastPosition).magnitude).ToString("f2") + " ... " + Input.acceleration.z.ToString("f1");
               lastPosition = player.position;
             }*/
-            if (score == 100 || score == 200 || score == 500 || score == 1000 || score == 2000)
-            {
-                GameService.ReportOngoingAchievement(score);
-            }
         }
     }
 
@@ -292,7 +288,6 @@ public class GameController : MonoBehaviour
             PlayerPrefs.SetInt("Score", score);
             PlayerPrefs.Save();
         }
-        GameService.ReportFinalScore(score);
         if (time100 > 0.0f)
         {
             int time100ms = Mathf.CeilToInt(time100 * 1000);
@@ -301,7 +296,6 @@ public class GameController : MonoBehaviour
                 PlayerPrefs.SetInt("Time100", time100ms);
                 PlayerPrefs.Save();
             }
-            GameService.ReportTime(100, time100ms);
         }
         if (time200 > 0.0f)
         {
@@ -311,7 +305,6 @@ public class GameController : MonoBehaviour
                 PlayerPrefs.SetInt("Time200", time200ms);
                 PlayerPrefs.Save();
             }
-            GameService.ReportTime(200, time200ms);
         }
         if (time500 > 0.0f)
         {
@@ -321,7 +314,6 @@ public class GameController : MonoBehaviour
                 PlayerPrefs.SetInt("Time500", time500ms);
                 PlayerPrefs.Save();
             }
-            GameService.ReportTime(500, time500ms);
         }
         if (time1000 > 0.0f)
         {
@@ -331,7 +323,6 @@ public class GameController : MonoBehaviour
                 PlayerPrefs.SetInt("Time1000", time1000ms);
                 PlayerPrefs.Save();
             }
-            GameService.ReportTime(1000, time1000ms);
         }
         if (time2000 > 0.0f)
         {
@@ -341,7 +332,6 @@ public class GameController : MonoBehaviour
                 PlayerPrefs.SetInt("Time2000", time2000ms);
                 PlayerPrefs.Save();
             }
-            GameService.ReportTime(2000, time2000ms);
         }
     }
 
