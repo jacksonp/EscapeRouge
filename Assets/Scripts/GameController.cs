@@ -41,8 +41,6 @@ public class GameController : MonoBehaviour
 
     private bool mIsAppLeft = false;
 
-    public Texture twitterImg, whatsAppImg, fbImage;
-
     void Start()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -117,35 +115,6 @@ public class GameController : MonoBehaviour
         }
         GUILayout.Space(40);
 
-        /*
-    if (!paused) {
-      string shareTxt = "I%20ran%20" + score + "%20clicks%20through%20Rouge!%20%23nobodyescapes%0Aagorite.com/escaperouge%0A";
-      //string shareTxt = "I ran " + score + " clicks through Rouge! #nobodyescapes\nhttp://agorite.com/escaperouge\n";
-
-      GUILayoutOption[] imgButOpts = new GUILayoutOption[] {
-        GUILayout.Width(30 * MainMenu.dimMultiplier),
-        GUILayout.Height(30 * MainMenu.dimMultiplier)
-      };
-
-      GUILayout.BeginHorizontal("box");
-      if (GUILayout.Button (twitterImg, imgButOpts)) {
-        StartCoroutine (Tweet (shareTxt));
-      }
-      GUILayout.Space(40);
-      if (GUILayout.Button (whatsAppImg, imgButOpts)) {
-        Application.OpenURL("whatsapp://send?text=" + shareTxt);
-      }
-      GUILayout.Space(40);
-      if (GUILayout.Button (fbImage, imgButOpts)) {
-        Application.OpenURL("http://www.facebook.com/dialog/feed?app_id=753625594683679&link=" + WWW.EscapeURL("http://agorite.com/escaperouge") + 
-                            "&name=" + WWW.EscapeURL("Escape Rouge") + "&caption=" + WWW.EscapeURL("Nobody escapes.") + "&description=" + 
-                            WWW.EscapeURL("I ran " + score + " clicks through Rouge!") + "&picture=" + WWW.EscapeURL("http://www.agorite.com/img/escape-rouge.png") +
-                            "&redirect_uri=" + WWW.EscapeURL("http://www.facebook.com/"));
-      }
-      GUILayout.EndHorizontal();
-    }
-        */
-
         GUILayout.EndArea();
 
     }
@@ -183,37 +152,6 @@ public class GameController : MonoBehaviour
     void OnApplicationPause(bool inIsPause)
     {
         this.mIsAppLeft = true;
-    }
-
-    /*
-    IEnumerator Facebook(string text) {
-      this.mIsAppLeft = false;
-      Application.OpenURL("fb:post?text=foo");// + text);
-      yield return new WaitForSeconds(1f);
-      if (this.mIsAppLeft) {
-        this.mIsAppLeft = false;
-      } else {
-        Application.OpenURL("http://www.facebook.com/dialog/feed?app_id=753625594683679&link=" + WWW.EscapeURL("http://agorite.com/escaperouge") + 
-                            "&name=" + WWW.EscapeURL("Escape Rouge") + "&caption=" + WWW.EscapeURL("Nobody escapes.") + "&description=" + 
-                            WWW.EscapeURL("I ran " + score + " clicks through Rouge!") + "&picture=" + WWW.EscapeURL("http://www.agorite.com/img/escape-rouge.png") +
-                            "&redirect_uri=" + WWW.EscapeURL("http://www.facebook.com/"));
-      }
-    }
-  */
-
-    IEnumerator Tweet(string text)
-    {
-        this.mIsAppLeft = false;
-        Application.OpenURL("twitter://post?message=" + text);
-        yield return new WaitForSeconds(1f);
-        if (this.mIsAppLeft)
-        {
-            this.mIsAppLeft = false;
-        }
-        else
-        {
-            Application.OpenURL("http://twitter.com/intent/tweet?text=" + text + "&amp;lang=en");
-        }
     }
 
     void Update()
