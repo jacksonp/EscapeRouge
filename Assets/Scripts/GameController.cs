@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class GameController : MonoBehaviour
     public int targetFramerate;
 
     public Transform player;
-    private Vector3 lastPosition;
+    //private Vector3 lastPosition;
 
     public GameObject hazard;
 
@@ -21,14 +22,15 @@ public class GameController : MonoBehaviour
     public float spawnWait;
     public float startWait;
 
-    public Text nobodyEscapesText;
-    public Text restartText;
+    public TMP_Text nobodyEscapesText;
+    public TMP_Text restartText;
 
     public int score;
-    public Text scoreText;
+
+    public TMP_Text scoreText;
 
     public float timePlayed;
-    public Text timeText;
+    public TMP_Text timeText;
     private float time100;
     private float time200;
     private float time500;
@@ -38,8 +40,6 @@ public class GameController : MonoBehaviour
     private bool gameOver;
     private bool restart;
     private bool paused;
-
-    private bool mIsAppLeft = false;
 
     void Start()
     {
@@ -62,16 +62,16 @@ public class GameController : MonoBehaviour
         restart = false;
         paused = false;
         restartText.text = "";
-        restartText.fontSize = Mathf.FloorToInt(restartText.fontSize * MainMenu.dimMultiplier);
+        //restartText.fontSize = Mathf.FloorToInt(restartText.fontSize * MainMenu.dimMultiplier);
         nobodyEscapesText.text = "";
-        nobodyEscapesText.fontSize = Mathf.FloorToInt(nobodyEscapesText.fontSize * MainMenu.dimMultiplier);
+        //nobodyEscapesText.fontSize = Mathf.FloorToInt(nobodyEscapesText.fontSize * MainMenu.dimMultiplier);
         //nobodyEscapesText.pixelOffset = new Vector2(0, nobodyEscapesText.pixelOffset.y * MainMenu.dimMultiplier);
         score = 0;
         scoreText.text = "0";
-        scoreText.fontSize = Mathf.FloorToInt(scoreText.fontSize * MainMenu.dimMultiplier);
+        //scoreText.fontSize = Mathf.FloorToInt(scoreText.fontSize * MainMenu.dimMultiplier);
         timePlayed = 0.0f;
         timeText.text = "0.00";
-        timeText.fontSize = Mathf.FloorToInt(timeText.fontSize * MainMenu.dimMultiplier);
+        //timeText.fontSize = Mathf.FloorToInt(timeText.fontSize * MainMenu.dimMultiplier);
         time100 = -1.0f;
         time200 = -1.0f;
         time500 = -1.0f;
@@ -147,11 +147,6 @@ public class GameController : MonoBehaviour
         {
             Pause();
         }
-    }
-
-    void OnApplicationPause(bool inIsPause)
-    {
-        this.mIsAppLeft = true;
     }
 
     void Update()
