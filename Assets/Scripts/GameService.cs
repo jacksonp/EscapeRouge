@@ -141,125 +141,171 @@ public static class GameService {
 
 #elif UNITY_IPHONE
 
-public static class GameService {
+public static class GameService
+{
 
-  public static bool mWaitingForAuth = false;
-  
-  public static bool IsAuthenticated () {
-    return Social.localUser.authenticated;
-  }
-  
-  public static void Authenticate (int doNext) {
-    mWaitingForAuth = true;
-    MainMenu.ResetStatusText("Authenticating...");
-    Social.localUser.Authenticate((bool success) => {
-      mWaitingForAuth = false;
-      MainMenu.ResetStatusText(success ? null : "Authentication failed.");
-      if (success) {
-        PlayerPrefs.SetInt("authenticated", 1);
+    public static bool mWaitingForAuth = false;
+
+    public static bool IsAuthenticated()
+    {
+        return Social.localUser.authenticated;
+    }
+
+    public static void Authenticate(int doNext)
+    {
+        mWaitingForAuth = true;
+        MainMenu.ResetStatusText("Authenticating...");
+        Social.localUser.Authenticate((bool success) =>
+        {
+            mWaitingForAuth = false;
+            MainMenu.ResetStatusText(success ? null : "Authentication failed.");
+            if (success)
+            {
+                PlayerPrefs.SetInt("authenticated", 1);
+                PlayerPrefs.Save();
+                if (doNext == 1)
+                {
+                    Social.ShowLeaderboardUI();
+                }
+                else if (doNext == 2)
+                {
+                    Social.ShowAchievementsUI();
+                }
+            }
+            else
+            {
+                PlayerPrefs.DeleteKey("authenticated"); // in case there is a previously saved value
+            }
+        });
+    }
+
+    public static void SignOut()
+    {
+        PlayerPrefs.DeleteKey("authenticated");
         PlayerPrefs.Save();
-        if (doNext == 1) {
-          Social.ShowLeaderboardUI();
-        } else if (doNext == 2) {
-          Social.ShowAchievementsUI();
+    }
+
+    public static void ShowLeaderboard()
+    {
+        if (!mWaitingForAuth)
+        {
+            if (IsAuthenticated())
+            {
+                Social.ShowLeaderboardUI();
+            }
+            else
+            {
+                Authenticate(1);
+            }
         }
-      } else {
-        PlayerPrefs.DeleteKey("authenticated"); // in case there is a previously saved value
-      }
-    });
-  }
-  
-  public static void SignOut () {
-    PlayerPrefs.DeleteKey("authenticated");
-    PlayerPrefs.Save();
-  }
-  
-  public static void ShowLeaderboard () {
-    if (!mWaitingForAuth) {
-      if (IsAuthenticated ()) {
-        Social.ShowLeaderboardUI();
-      } else {
-        Authenticate(1); 
-      }
-    }
-  }
-  
-  public static void ShowAchievements () {  
-    if (!mWaitingForAuth) {
-      if (IsAuthenticated()) {
-        Social.ShowAchievementsUI();
-      } else {
-        Authenticate(2); 
-      }
-    }
-  }
-
-  public static void ReportFinalScore (int score) {
-    if (!Social.localUser.authenticated) {
-      return;
-    }  
-    Social.ReportScore(score, "LongestRun", (bool success) => {
-      PlayerPrefs.SetInt("HighestReportedScore", score);
-      PlayerPrefs.Save();
-    });
-  }
-
-  public static void ReportTime (int distance, int time) {
-    if (time <= 0 || !Social.localUser.authenticated) {
-      return;
-    }
-    string leaderboardID;
-    if (distance == 100) {
-      leaderboardID = "Fast100";
-    } else if (distance == 200) {
-      leaderboardID = "Fast200";
-    } else if (distance == 500) {
-      leaderboardID = "Fast500";
-    } else if (distance == 1000) {
-      leaderboardID = "Fast1000";
-    } else if (distance == 2000) {
-      leaderboardID = "Fast2000";
-    } else {
-      return;
-    }
-    Social.ReportScore(time / 10, leaderboardID, (bool success) => {
-      PlayerPrefs.SetInt("LowestReportedTime" + distance, time);
-      PlayerPrefs.Save();
-    });
-  }
-
-  public static void ReportOngoingAchievement (int score) {
-    if (!Social.localUser.authenticated) {
-      return;
     }
 
-    int bestPrevReported = PlayerPrefs.GetInt("HighestReportedScore");
-    
-    if (score < bestPrevReported) {
-      return;
-    }
-    
-    if (bestPrevReported < 100 && score >= 100) {
-      Social.ReportProgress("Run100", 100.0f, (bool success) => {});
-      Social.ReportProgress("Run200", 0.0f, (bool success) => {});
-    }
-    if (bestPrevReported < 200 && score >= 200) {
-      Social.ReportProgress("Run200", 100.0f, (bool success) => {});
-      Social.ReportProgress("Run500", 0.0f, (bool success) => {});
-    }
-    if (bestPrevReported < 500 && score >= 500) {
-      Social.ReportProgress("Run500", 100.0f, (bool success) => {});
-      Social.ReportProgress("Run1000", 0.0f, (bool success) => {});
-    }
-    if (bestPrevReported < 1000 && score >= 1000) {
-      Social.ReportProgress("Run1000", 100.0f, (bool success) => {});
-      Social.ReportProgress("EscapeRouge", 0.0f, (bool success) => {});
-    }
-    if (bestPrevReported < 2000 && score >= 2000) {
-      Social.ReportProgress("EscapeRouge", 100.0f, (bool success) => {});
+    public static void ShowAchievements()
+    {
+        if (!mWaitingForAuth)
+        {
+            if (IsAuthenticated())
+            {
+                Social.ShowAchievementsUI();
+            }
+            else
+            {
+                Authenticate(2);
+            }
+        }
     }
 
-  }
+    public static void ReportFinalScore(int score)
+    {
+        if (!Social.localUser.authenticated)
+        {
+            return;
+        }
+        Social.ReportScore(score, "LongestRun", (bool success) =>
+        {
+            PlayerPrefs.SetInt("HighestReportedScore", score);
+            PlayerPrefs.Save();
+        });
+    }
+
+    public static void ReportTime(int distance, int time)
+    {
+        if (time <= 0 || !Social.localUser.authenticated)
+        {
+            return;
+        }
+        string leaderboardID;
+        if (distance == 100)
+        {
+            leaderboardID = "Fast100";
+        }
+        else if (distance == 200)
+        {
+            leaderboardID = "Fast200";
+        }
+        else if (distance == 500)
+        {
+            leaderboardID = "Fast500";
+        }
+        else if (distance == 1000)
+        {
+            leaderboardID = "Fast1000";
+        }
+        else if (distance == 2000)
+        {
+            leaderboardID = "Fast2000";
+        }
+        else
+        {
+            return;
+        }
+        Social.ReportScore(time / 10, leaderboardID, (bool success) =>
+        {
+            PlayerPrefs.SetInt("LowestReportedTime" + distance, time);
+            PlayerPrefs.Save();
+        });
+    }
+
+    public static void ReportOngoingAchievement(int score)
+    {
+        if (!Social.localUser.authenticated)
+        {
+            return;
+        }
+
+        int bestPrevReported = PlayerPrefs.GetInt("HighestReportedScore");
+
+        if (score < bestPrevReported)
+        {
+            return;
+        }
+
+        if (bestPrevReported < 100 && score >= 100)
+        {
+            Social.ReportProgress("Run100", 100.0f, (bool success) => { });
+            Social.ReportProgress("Run200", 0.0f, (bool success) => { });
+        }
+        if (bestPrevReported < 200 && score >= 200)
+        {
+            Social.ReportProgress("Run200", 100.0f, (bool success) => { });
+            Social.ReportProgress("Run500", 0.0f, (bool success) => { });
+        }
+        if (bestPrevReported < 500 && score >= 500)
+        {
+            Social.ReportProgress("Run500", 100.0f, (bool success) => { });
+            Social.ReportProgress("Run1000", 0.0f, (bool success) => { });
+        }
+        if (bestPrevReported < 1000 && score >= 1000)
+        {
+            Social.ReportProgress("Run1000", 100.0f, (bool success) => { });
+            Social.ReportProgress("EscapeRouge", 0.0f, (bool success) => { });
+        }
+        if (bestPrevReported < 2000 && score >= 2000)
+        {
+            Social.ReportProgress("EscapeRouge", 100.0f, (bool success) => { });
+        }
+
+    }
 }
 
 #endif

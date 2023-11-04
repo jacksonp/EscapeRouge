@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DestroyByBoundary : MonoBehaviour {
+public class DestroyByBoundary : MonoBehaviour
+{
 
-	void OnTriggerExit2D (Collider2D other) {
-		//Destroy (other.gameObject);
-    other.gameObject.SetActive(false);
-	}
+    void OnTriggerExit2D(Collider2D other)
+    {
+        //Destroy (other.gameObject);
+        other.gameObject.SetActive(false);
+    }
 }
