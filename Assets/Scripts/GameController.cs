@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -95,7 +95,7 @@ public class GameController : MonoBehaviour
         {
             if (GUILayout.Button(Localise.translate("New Game"), MainMenu.buttonStyle))
             {
-                Application.LoadLevel(Application.loadedLevel);
+                SceneManager.LoadScene("RandomAsteroids");
             }
         }
         GUILayout.Space(40);
@@ -106,7 +106,7 @@ public class GameController : MonoBehaviour
             {
                 Resume();
             }
-            Application.LoadLevel("MainMenu");
+            SceneManager.LoadScene("MainMenu");
         }
         GUILayout.Space(40);
 
@@ -152,7 +152,7 @@ public class GameController : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Escape))
         {
-            Application.LoadLevel("MainMenu");
+            SceneManager.LoadScene("MainMenu");
         }
         if (!gameOver && !paused)
         {

@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -98,7 +98,7 @@ public class MainMenu : MonoBehaviour
 
         if (GUILayout.Button(Localise.translate("PLAY"), buttonStyle))
         {
-            Application.LoadLevel("RandomAsteroids");
+            SceneManager.LoadScene("RandomAsteroids");
         }
         GUILayout.Space(20);
 
