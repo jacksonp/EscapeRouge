@@ -21,8 +21,8 @@ public class Starfield : MonoBehaviour
         for (int i = 0; i < starsMax; i++)
         {
             points[i].position = new Vector3(Random.Range(-xOffset, xOffset), Random.Range(-yOffset, yOffset), 0) + tx.position;
-            points[i].color = new Color(1, 1, 1, Random.Range(0.1f, 1.0f));
-            points[i].size = Random.Range(starSize / 2, starSize);
+            points[i].startColor = new Color(1, 1, 1, Random.Range(0.1f, 1.0f));
+            points[i].startSize = Random.Range(starSize / 2, starSize);
         }
     }
 
