@@ -62,16 +62,11 @@ public class GameController : MonoBehaviour
         restart = false;
         paused = false;
         restartText.text = "";
-        //restartText.fontSize = Mathf.FloorToInt(restartText.fontSize * MainMenu.dimMultiplier);
         nobodyEscapesText.text = "";
-        //nobodyEscapesText.fontSize = Mathf.FloorToInt(nobodyEscapesText.fontSize * MainMenu.dimMultiplier);
-        //nobodyEscapesText.pixelOffset = new Vector2(0, nobodyEscapesText.pixelOffset.y * MainMenu.dimMultiplier);
         score = 0;
         scoreText.text = "0";
-        //scoreText.fontSize = Mathf.FloorToInt(scoreText.fontSize * MainMenu.dimMultiplier);
         timePlayed = 0.0f;
         timeText.text = "0.00";
-        //timeText.fontSize = Mathf.FloorToInt(timeText.fontSize * MainMenu.dimMultiplier);
         time100 = -1.0f;
         time200 = -1.0f;
         time500 = -1.0f;
