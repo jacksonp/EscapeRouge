@@ -13,10 +13,6 @@ public static class Localise
             {
                 case "PLAY":
                     return "JOUER";
-                case "Leaderboard":
-                    return "Classement";
-                case "Achievements":
-                    return "Réussites";
                 case "Quit":
                     return "Quitter";
                 case "High Score":
@@ -37,10 +33,6 @@ public static class Localise
                     return "Vitesse:\nincliner haut & bas";
                 case "Time to":
                     return "Chrono";
-                case "Authenticating...":
-                    return "Authentification...";
-                case "Authentication failed.":
-                    return "Authentification a échoué.";
                 case "NOBODY\nESCAPES\nROUGE":
                     return "PERSONNE\nN'ECHAPPE\nROUGE";
                 default:
