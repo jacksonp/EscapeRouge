@@ -1,7 +1,7 @@
-# EscapeRouge
-Open source unity game ([Google Play](https://play.google.com/store/apps/details?id=com.agorite.escaperouge), [iTunes](https://itunes.apple.com/us/app/escape-rouge/id899501734?ls=1&mt=8)).
+# Escape Rouge
+Open source unity game.
 
 # Installation
 
-Clone this repo, open in Unity 5, [install the Google Play Games plugin](https://github.com/playgameservices/play-games-plugin-for-unity#plugin-installation). That's it: build and run.
+Clone this repo, open in Unity 2022, build and run.
 
