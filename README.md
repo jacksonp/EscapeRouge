@@ -1,5 +1,5 @@
 # Escape Rouge
-Open source unity game.
+Open source unity game. [See it in action](https://jacksonp.github.io/EscapeRouge/htdocs/)
 
 # Installation
 
